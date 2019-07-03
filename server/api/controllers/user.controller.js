@@ -16,7 +16,7 @@ class userController {
                     algorithm: process.env.JWT_ALGORITHM
                 };
                 let token = jwt.sign(jwtSignData, process.env.JWT_SECRET, jwtSignOptions);
-                res.json({ status: true, token: token });
+                res.json({ status: true, token: token, user: user });
             } else {
                 res.json({ status: false, error: 'Invalid Credentials' });
             }
