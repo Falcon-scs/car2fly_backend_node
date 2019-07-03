@@ -16,9 +16,9 @@ class userController {
                     algorithm: process.env.JWT_ALGORITHM
                 };
                 let token = jwt.sign(jwtSignData, process.env.JWT_SECRET, jwtSignOptions);
-                res.status(200).json(token);
+                res.json({ status: true, token: token });
             } else {
-                res.status(401).json({ status: false, error: 'Invalid Credentials' });
+                res.json({ status: false, error: 'Invalid Credentials' });
             }
         });
 
@@ -28,9 +28,9 @@ class userController {
         let body = req.body;
         create(body, (err, id) => {
             if (err) {
-                res.status(302).json({ status: false, err: err })
+                res.json({ status: false, err: err })
             } else {
-                res.status(200).json({ status: true })
+                res.json({ status: true })
             }
         })
 
