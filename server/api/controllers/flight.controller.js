@@ -3,6 +3,7 @@ const httpStatus = require('http-status')
 const { handler: errorHandler } = require('../middlewares/error')
 const APIError = require('../utils/APIError')
 const amadeusClient = require('../../config/amadeus')
+const Amadeus = require('amadeus')
 
 exports.flightOffers = async (req, res) => {
   try {
@@ -24,7 +25,7 @@ exports.locations = async (req, res) => {
     const { keyword } = req.body
     const locations = await amadeusClient.referenceData.locations.get({
       keyword,
-      subType: 'AIRPORT'
+      subType: Amadeus.location.any
     })
       .then(res => res.data)
       .catch(error => {
